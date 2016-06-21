@@ -2,7 +2,7 @@
     $host = "localhost";
     $database = "seasons";
     $username = "root";
-    $password = "root";
+    $password = "";
 
     try {
         $pdo = new PDO("mysql:host=" .$host. ";dbname=$database", $username, $password);
@@ -16,10 +16,10 @@
     }
 
 
-public function vardump($v) {
+function vardump($v) {
     echo "<pre><code>";
     var_dump($v);
-    echo "</code></pre>"
+    echo "</code></pre>";
 }
 
     // include('connect.php');

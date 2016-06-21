@@ -71,7 +71,7 @@
                         <?php
                         include 'connect.inc.php';
                         try {
-                            $sql = "SELECT * FROM season_activity where cityId is NULL LIMIT 10";
+                            $sql = "SELECT * FROM season_city ";
                             $stmt = $pdo->prepare($sql);
                             $stmt->execute();
                         } catch(PDOException $e) {
@@ -83,25 +83,11 @@
                         $results = $stmt->fetchAll();
                         // var_dump($results);
                         ?>
-                        <form method="POST" action="process.php">
-                            <table class="table">
+                        <form method="POST" action="process=city.php">
+                                <select name="city">
                                 <?php
                                 foreach ($results as $row) {
-                                echo "<tr>";
-                                    echo "<td><input type='checkbox' name='id[]' value='$row[activityId]'> $row[activityName] </td>";
-                                    echo "<td>  </td>";
-                                echo "</tr>";
-                                }
-                                ?>
-                            </table>
-                            <select name="city">
-                                <?php
-                                $sql1 = "SELECT * FROM season_city ";
-                                $stmt1 = $pdo->prepare($sql1);
-                                $stmt1->execute();
-                                $results1 = $stmt1->fetchAll();
-                                foreach ($results1 as $row) {
-                                    echo "<option value='$row[cityId]'>$row[cityName]</option>"; 
+                                    echo "<option value='$row[cityID]>$row[cityName]</option>"; 
                                 }
                                 ?>
                                 </select>

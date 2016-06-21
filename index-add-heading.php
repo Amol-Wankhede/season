@@ -71,7 +71,7 @@
                         <?php
                         include 'connect.inc.php';
                         try {
-                            $sql = "SELECT * FROM season_activity where cityId is NULL LIMIT 10";
+                            $sql = "SELECT * FROM season_activity where activityHeadingId is NULL LIMIT 10";
                             $stmt = $pdo->prepare($sql);
                             $stmt->execute();
                         } catch(PDOException $e) {
@@ -83,7 +83,7 @@
                         $results = $stmt->fetchAll();
                         // var_dump($results);
                         ?>
-                        <form method="POST" action="process.php">
+                        <form method="POST" action="process-heading.php">
                             <table class="table">
                                 <?php
                                 foreach ($results as $row) {
@@ -94,14 +94,14 @@
                                 }
                                 ?>
                             </table>
-                            <select name="city">
+                            <select name="heading">
                                 <?php
-                                $sql1 = "SELECT * FROM season_city ";
+                                $sql1 = "SELECT * FROM season_activity_heading ";
                                 $stmt1 = $pdo->prepare($sql1);
                                 $stmt1->execute();
                                 $results1 = $stmt1->fetchAll();
                                 foreach ($results1 as $row) {
-                                    echo "<option value='$row[cityId]'>$row[cityName]</option>"; 
+                                    echo "<option value='$row[headingId]'>$row[activityHeading]</option>"; 
                                 }
                                 ?>
                                 </select>
