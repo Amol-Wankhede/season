@@ -12,4 +12,7 @@
 
 	$stmt1 = $pdo->prepare($sql);
                                 $stmt1->execute();
+
  ?>
+
+ 	<a href="index.php">Click here for more</a>

@@ -13,3 +13,5 @@
 	$stmt1 = $pdo->prepare($sql);
                                 $stmt1->execute();
  ?>
+
+  	<a href="index-add-heading.php">Click here for more</a>

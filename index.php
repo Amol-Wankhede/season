@@ -86,9 +86,11 @@
                         <form method="POST" action="process.php">
                             <table class="table">
                                 <?php
+
                                 foreach ($results as $row) {
+
                                 echo "<tr>";
-                                    echo "<td><input type='checkbox' name='id[]' value='$row[activityId]'> $row[activityName] </td>";
+                                    echo "<td><input type='checkbox' name='id[]' value='$row[activityId]' checked> $row[activityName]  <strong>$row[price]</strong></td>";
                                     echo "<td>  </td>";
                                 echo "</tr>";
                                 }
@@ -100,8 +102,12 @@
                                 $stmt1 = $pdo->prepare($sql1);
                                 $stmt1->execute();
                                 $results1 = $stmt1->fetchAll();
+                                $count = 0;
                                 foreach ($results1 as $row) {
-                                    echo "<option value='$row[cityId]'>$row[cityName]</option>"; 
+                                    if($count == 13) {
+                                        echo "<option value='$row[cityId]'>$row[cityName]</option>"; 
+                                    } 
+                                    $count++;
                                 }
                                 ?>
                                 </select>

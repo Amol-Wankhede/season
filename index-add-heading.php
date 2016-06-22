@@ -71,7 +71,7 @@
                         <?php
                         include 'connect.inc.php';
                         try {
-                            $sql = "SELECT * FROM season_activity where activityHeadingId is NULL LIMIT 10";
+                            $sql = "SELECT * FROM season_activity where activityHeadingId is NULL  LIMIT 10";
                             $stmt = $pdo->prepare($sql);
                             $stmt->execute();
                         } catch(PDOException $e) {
@@ -88,7 +88,7 @@
                                 <?php
                                 foreach ($results as $row) {
                                 echo "<tr>";
-                                    echo "<td><input type='checkbox' name='id[]' value='$row[activityId]'> $row[activityName] </td>";
+                                    echo "<td><input type='checkbox' name='id[]' value='$row[activityId]' checked> $row[activityName] <strong>$row[price]</strong> </input> </td>";
                                     echo "<td>  </td>";
                                 echo "</tr>";
                                 }
@@ -96,12 +96,13 @@
                             </table>
                             <select name="heading">
                                 <?php
-                                $sql1 = "SELECT * FROM season_activity_heading ";
-                                $stmt1 = $pdo->prepare($sql1);
+                                $sql1 = "SELECT * FROM season_activity_heading WHERE  headingId NOT IN (SELECT activityHeadingId FROM season_activity WHERE activityHeadingId IS NOT NULL GROUP BY  activityHeadingId )"; 
+                                 $stmt1 = $pdo->prepare($sql1);
                                 $stmt1->execute();
                                 $results1 = $stmt1->fetchAll();
+                                $count = 0;
                                 foreach ($results1 as $row) {
-                                    echo "<option value='$row[headingId]'>$row[activityHeading]</option>"; 
+                                         echo "<option value='$row[headingId]'>$row[activityHeading]</option>"; 
                                 }
                                 ?>
                                 </select>
